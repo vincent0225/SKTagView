@@ -15,6 +15,8 @@
 @property (nonatomic, strong) NSMutableArray *tagsConstraints;
 @property (nonatomic, strong) NSMutableArray *tags;
 @property (nonatomic) BOOL didSetup;
+@property (strong,nonatomic) MASConstraint *tailConst;
+@property (strong,nonatomic) MASConstraint *topConst;
 @end
 
 @implementation SKTagView
@@ -138,6 +140,8 @@
     //Install new constraints
     NSArray *subviews = self.subviews;
     UIView *previewsView = nil;
+    UIView *largestView = nil;
+    UIView *lastLineLargestView = nil;
     UIView *superView = self;
     CGFloat leftOffset = self.padding.left;
     CGFloat bottomOffset = self.padding.bottom;
@@ -153,7 +157,7 @@
         {
             [view mas_makeConstraints:^(MASConstraintMaker *make)
              {
-                 SAVE_C(make.trailing.lessThanOrEqualTo(superView).with.offset(-rightOffset));
+                 //SAVE_C(make.trailing.lessThanOrEqualTo(superView).with.offset(-rightOffset));
              }];
             
             CGSize size = view.intrinsicContentSize;
@@ -163,32 +167,62 @@
                 currentX += itemMargin;
                 if (currentX + width + rightOffset <= self.preferredMaxLayoutWidth)
                 {
+                    [self.tailConst uninstall];
                     [view mas_makeConstraints:^(MASConstraintMaker *make)
-                    {
-                        SAVE_C(make.leading.equalTo(previewsView.mas_trailing).with.offset(itemMargin));
-                        SAVE_C(make.centerY.equalTo(previewsView.mas_centerY));
-                    }];
+                     {
+                         SAVE_C(make.leading.equalTo(previewsView.mas_trailing).with.offset(itemMargin));
+                         SAVE_C(make.centerY.equalTo(previewsView.mas_centerY));
+                         float tail = (self.frame.size.width - currentX - size.width)/2;
+                         NSLog(@"%.f",tail);
+                         self.tailConst = make.trailing.equalTo(superView.mas_trailing).with.offset(-tail);
+                         SAVE_C(self.tailConst);
+                         
+                     }];
+                    //same line, compare..
+                    if (size.height > largestView.intrinsicContentSize.height) {
+                        if (lastLineLargestView != nil) {
+                            [self.topConst uninstall];
+                            [view mas_makeConstraints:^(MASConstraintMaker *make) {
+                                self.topConst = make.top.equalTo(lastLineLargestView.mas_bottom).with.offset(itemVerticalMargin);
+                                SAVE_C(self.topConst);
+                            }];
+                        }
+                        largestView = view;
+                    }
                     currentX += size.width;
                 }
                 else
                 {
                     //new line
                     [view mas_makeConstraints:^(MASConstraintMaker *make)
-                    {
-                        SAVE_C(make.top.greaterThanOrEqualTo(previewsView.mas_bottom).with.offset(itemVerticalMargin));
-                        SAVE_C(make.leading.equalTo(superView.mas_leading).with.offset(leftOffset));
-                    }];
+                     {
+                         self.topConst = make.top.equalTo(largestView.mas_bottom).with.offset(itemVerticalMargin);
+                         SAVE_C(self.topConst);
+                         SAVE_C(make.leading.greaterThanOrEqualTo(superView.mas_leading).with.offset(leftOffset));
+                         float tail = (self.frame.size.width - size.width)/2;
+                         NSLog(@"%.f %.f %.f",tail,self.frame.size.width,size.width);
+                         self.tailConst = make.trailing.equalTo(superView.mas_trailing).with.offset(-tail);
+                         SAVE_C(self.tailConst);
+                     }];
+                    
+                    lastLineLargestView = largestView;
+                    largestView = view;
                     currentX = leftOffset + size.width;
                 }
             }
             else
             {
                 //first one
+                largestView = view;
                 [view mas_makeConstraints:^(MASConstraintMaker *make)
-                {
-                    SAVE_C(make.top.equalTo(superView.mas_top).with.offset(topPadding));
-                    SAVE_C(make.leading.equalTo(superView.mas_leading).with.offset(leftOffset));
-                }];
+                 {
+                     SAVE_C(make.top.equalTo(superView.mas_top).with.offset(topPadding));
+                     SAVE_C(make.leading.greaterThanOrEqualTo(superView.mas_leading).with.offset(leftOffset));
+                     float tail = (self.frame.size.width - size.width)/2;
+                     NSLog(@"%.f %.f %.f",tail,self.frame.size.width,size.width);
+                     self.tailConst = make.trailing.equalTo(superView.mas_trailing).with.offset(-tail);
+                     SAVE_C(self.tailConst);
+                 }];
                 currentX += size.width;
             }
             
@@ -224,7 +258,7 @@
         }
     }
     
-    [previewsView mas_makeConstraints:^(MASConstraintMaker *make)
+    [largestView mas_makeConstraints:^(MASConstraintMaker *make)
      {
          SAVE_C(make.bottom.equalTo(superView.mas_bottom).with.offset(-bottomOffset));
      }];
