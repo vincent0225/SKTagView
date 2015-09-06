@@ -6,6 +6,7 @@
 //
 
 #import "SKTagView.h"
+#import "SKTagButtonView.h"
 #import "SKTagButton.h"
 #import <Masonry/Masonry.h>
 
@@ -304,8 +305,14 @@
 #pragma mark - Public methods
 - (void)addTag:(SKTag *)tag
 {
+//    UIView *btn = [[[NSBundle mainBundle] loadNibNamed:@"SKTagButtonView" owner:self options:nil] objectAtIndex:0];
+//    btn.frame = CGRectMake(0, 0, 200, 200);
+//    //UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 100, 100)];
+//    btn.backgroundColor = [UIColor redColor];
+//    
+    
     SKTagButton *btn = [SKTagButton buttonWithTag:tag];
-    [btn addTarget:self action:@selector(onTag:) forControlEvents:UIControlEventTouchUpInside];
+    //[btn addTarget:self action:@selector(onTag:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:btn];
     [self.tags addObject:tag];
     
@@ -321,8 +328,8 @@
     }
     else
     {
-        SKTagButton *btn = [SKTagButton buttonWithTag:tag];
-        [btn addTarget:self action:@selector(onTag:) forControlEvents:UIControlEventTouchUpInside];
+        SKTagButtonView *btn = [SKTagButtonView buttonWithTag:tag];
+        //[btn addTarget:self action:@selector(onTag:) forControlEvents:UIControlEventTouchUpInside];
         [self insertSubview:btn atIndex:index];
         [self.tags insertObject:tag atIndex:index];
         
