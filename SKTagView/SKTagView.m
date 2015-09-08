@@ -25,6 +25,7 @@
 #pragma mark - Life circle
 - (void)updateConstraints
 {
+//    NSLog(@"update const");
     [self updateWrappingConstrains];
     [super updateConstraints];
 }
@@ -51,8 +52,10 @@
     if (!self.singleLine && self.preferredMaxLayoutWidth > 0)
     {
         NSInteger lineCount = 0;
+        NSLog(@"start loop!!!");
         for (UIView *view in subviews)
         {
+            
             CGSize size = view.intrinsicContentSize;
             if (previewsView)
             {
@@ -83,16 +86,18 @@
             previewsView = view;
             intrinsicWidth = MAX(intrinsicWidth, currentX + rightOffset);
         }
-        
+        NSLog(@"end loop!!!");
         intrinsicHeight += bottomOffset + itemVerticalMargin * (lineCount - 1);
     }
     else
     {
+        NSLog(@"start next loop!!!");
         for (UIView *view in subviews)
         {
             CGSize size = view.intrinsicContentSize;
             intrinsicWidth += size.width;
         }
+        NSLog(@"end next loop!!!");
         intrinsicWidth += itemMargin * (subviews.count - 1) + rightOffset;
         intrinsicHeight += ((UIView *)subviews.firstObject).intrinsicContentSize.height + bottomOffset;
     }
@@ -102,11 +107,13 @@
 
 - (void)layoutSubviews
 {
+    NSLog(@"start Layout subview");
     if (!self.singleLine) {
         self.preferredMaxLayoutWidth = self.frame.size.width;
     }
     
     [super layoutSubviews];
+    NSLog(@"end Layout subview");
 }
 
 #pragma mark - Private methods
@@ -156,6 +163,8 @@
     {
         for (UIView *view in subviews)
         {
+//            NSLog(@"%@",NSStringFromClass([view class]));
+            
             [view mas_makeConstraints:^(MASConstraintMaker *make)
              {
                  //SAVE_C(make.trailing.lessThanOrEqualTo(superView).with.offset(-rightOffset));
@@ -174,7 +183,7 @@
                          SAVE_C(make.leading.equalTo(previewsView.mas_trailing).with.offset(itemMargin));
                          SAVE_C(make.centerY.equalTo(previewsView.mas_centerY));
                          float tail = (self.frame.size.width - currentX - size.width)/2;
-                         NSLog(@"%.f",tail);
+                         //NSLog(@"%.f",tail);
                          self.tailConst = make.trailing.equalTo(superView.mas_trailing).with.offset(-tail);
                          SAVE_C(self.tailConst);
                          
@@ -201,7 +210,7 @@
                          SAVE_C(self.topConst);
                          SAVE_C(make.leading.greaterThanOrEqualTo(superView.mas_leading).with.offset(leftOffset));
                          float tail = (self.frame.size.width - size.width)/2;
-                         NSLog(@"%.f %.f %.f",tail,self.frame.size.width,size.width);
+                         //NSLog(@"%.f %.f %.f",tail,self.frame.size.width,size.width);
                          self.tailConst = make.trailing.equalTo(superView.mas_trailing).with.offset(-tail);
                          SAVE_C(self.tailConst);
                      }];
@@ -220,7 +229,7 @@
                      SAVE_C(make.top.equalTo(superView.mas_top).with.offset(topPadding));
                      SAVE_C(make.leading.greaterThanOrEqualTo(superView.mas_leading).with.offset(leftOffset));
                      float tail = (self.frame.size.width - size.width)/2;
-                     NSLog(@"%.f %.f %.f",tail,self.frame.size.width,size.width);
+                     //NSLog(@"%.f %.f %.f",tail,self.frame.size.width,size.width);
                      self.tailConst = make.trailing.equalTo(superView.mas_trailing).with.offset(-tail);
                      SAVE_C(self.tailConst);
                  }];
@@ -263,7 +272,7 @@
      {
          SAVE_C(make.bottom.equalTo(superView.mas_bottom).with.offset(-bottomOffset));
      }];
-    
+//    NSLog(@"did setup yes");
     self.didSetup = YES;
 }
 
@@ -287,9 +296,11 @@
 
 - (void)setPreferredMaxLayoutWidth:(CGFloat)preferredMaxLayoutWidth
 {
+//    NSLog(@"setPreferredMaxLayoutWidth11");
     if (preferredMaxLayoutWidth != _preferredMaxLayoutWidth) {
         _didSetup = NO;
         _preferredMaxLayoutWidth = preferredMaxLayoutWidth;
+//        NSLog(@"setPreferredMaxLayoutWidth");
         [self setNeedsUpdateConstraints];
     }
 }
@@ -312,12 +323,25 @@
 //    
     
     SKTagButton *btn = [SKTagButton buttonWithTag:tag];
+    [btn swapImageText];
+
+//    SKTagButtonView *btn = [SKTagButtonView buttonWithTag:tag];
+    
+    
     //[btn addTarget:self action:@selector(onTag:) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    
     [self addSubview:btn];
     [self.tags addObject:tag];
     
     self.didSetup = NO;
+    //[self invalidateIntrinsicContentSize];
+}
+
+-(void)commit{
     [self invalidateIntrinsicContentSize];
+    [self layoutIfNeeded];
 }
 
 - (void)insertTag:(SKTag *)tag atIndex:(NSUInteger)index

@@ -13,8 +13,6 @@
 
 @interface SKTagButtonView : UIView
 
-@property (weak,nonatomic) IBOutlet UILabel *titleLabel;
-@property (weak,nonatomic) IBOutlet UIImageView *tagImg;
 + (instancetype)buttonWithTag:(SKTag *)tag;
 
 @end

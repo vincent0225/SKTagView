@@ -23,6 +23,6 @@
 - (void)removeAllTags;
 
 @property (nonatomic, copy) void (^didClickTagAtIndex)(NSUInteger index);
-
+-(void)commit;
 @end
 

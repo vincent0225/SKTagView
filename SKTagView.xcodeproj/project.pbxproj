@@ -16,8 +16,9 @@
 		682ABA7E1A36933300D57A1A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 682ABA7C1A36933300D57A1A /* LaunchScreen.xib */; };
 		682ABA951A3693BC00D57A1A /* SKTagView.m in Sources */ = {isa = PBXBuildFile; fileRef = 682ABA941A3693BC00D57A1A /* SKTagView.m */; };
 		6AB277B71AE2A80700D92167 /* SKTagViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AB277B61AE2A80700D92167 /* SKTagViewTests.m */; };
+		BF06330E1B9EBA71008E42E9 /* add.png in Resources */ = {isa = PBXBuildFile; fileRef = BF06330D1B9EBA71008E42E9 /* add.png */; };
+		BF1687F21B9D3E40009DAB90 /* UIView+Autolayout.m in Sources */ = {isa = PBXBuildFile; fileRef = BF1687F11B9D3E40009DAB90 /* UIView+Autolayout.m */; };
 		BFE3F25E1B84C8A8002824E0 /* SKTagButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = BFE3F25D1B84C8A8002824E0 /* SKTagButtonView.m */; };
-		BFE3F2601B84C8AD002824E0 /* SKTagButtonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFE3F25F1B84C8AD002824E0 /* SKTagButtonView.xib */; };
 		D865CB921A6415B200F3592C /* TagsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D865CB911A6415B200F3592C /* TagsTableViewController.m */; };
 		D865CB951A64160500F3592C /* TagsTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D865CB941A64160500F3592C /* TagsTableCell.m */; };
 		E198833B70106A7B969AF9D2 /* SKTag.m in Sources */ = {isa = PBXBuildFile; fileRef = E198883D944B29B6488A5B34 /* SKTag.m */; };
@@ -53,9 +54,11 @@
 		682ABA941A3693BC00D57A1A /* SKTagView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTagView.m; sourceTree = "<group>"; };
 		6AB277B61AE2A80700D92167 /* SKTagViewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTagViewTests.m; sourceTree = "<group>"; };
 		6E4B93550F83909B378F1930 /* Pods-SKTagView.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SKTagView.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SKTagView/Pods-SKTagView.debug.xcconfig"; sourceTree = "<group>"; };
+		BF06330D1B9EBA71008E42E9 /* add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add.png; sourceTree = "<group>"; };
+		BF1687F01B9D3E40009DAB90 /* UIView+Autolayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+Autolayout.h"; path = "../SKTagView/UIView+Autolayout.h"; sourceTree = "<group>"; };
+		BF1687F11B9D3E40009DAB90 /* UIView+Autolayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+Autolayout.m"; path = "../SKTagView/UIView+Autolayout.m"; sourceTree = "<group>"; };
 		BFE3F25C1B84C8A8002824E0 /* SKTagButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKTagButtonView.h; sourceTree = "<group>"; };
 		BFE3F25D1B84C8A8002824E0 /* SKTagButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTagButtonView.m; sourceTree = "<group>"; };
-		BFE3F25F1B84C8AD002824E0 /* SKTagButtonView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SKTagButtonView.xib; sourceTree = "<group>"; };
 		D865CB901A6415B200F3592C /* TagsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagsTableViewController.h; sourceTree = "<group>"; };
 		D865CB911A6415B200F3592C /* TagsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagsTableViewController.m; sourceTree = "<group>"; };
 		D865CB931A64160500F3592C /* TagsTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagsTableCell.h; sourceTree = "<group>"; };
@@ -108,6 +111,8 @@
 		682ABA6C1A36933300D57A1A /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				BF1687F01B9D3E40009DAB90 /* UIView+Autolayout.h */,
+				BF1687F11B9D3E40009DAB90 /* UIView+Autolayout.m */,
 				CB3B6CFF1A5E27C9008911FF /* SKTagView */,
 				682ABA711A36933300D57A1A /* AppDelegate.h */,
 				682ABA721A36933300D57A1A /* AppDelegate.m */,
@@ -128,6 +133,7 @@
 		682ABA6D1A36933300D57A1A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				BF06330D1B9EBA71008E42E9 /* add.png */,
 				682ABA6E1A36933300D57A1A /* Info.plist */,
 				682ABA6F1A36933300D57A1A /* main.m */,
 			);
@@ -163,7 +169,6 @@
 		CB3B6CFF1A5E27C9008911FF /* SKTagView */ = {
 			isa = PBXGroup;
 			children = (
-				BFE3F25F1B84C8AD002824E0 /* SKTagButtonView.xib */,
 				BFE3F25C1B84C8A8002824E0 /* SKTagButtonView.h */,
 				BFE3F25D1B84C8A8002824E0 /* SKTagButtonView.m */,
 				682ABA931A3693BC00D57A1A /* SKTagView.h */,
@@ -268,9 +273,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				682ABA791A36933300D57A1A /* Main.storyboard in Resources */,
-				BFE3F2601B84C8AD002824E0 /* SKTagButtonView.xib in Resources */,
 				682ABA7E1A36933300D57A1A /* LaunchScreen.xib in Resources */,
 				682ABA7B1A36933300D57A1A /* Images.xcassets in Resources */,
+				BF06330E1B9EBA71008E42E9 /* add.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,6 +333,7 @@
 				682ABA951A3693BC00D57A1A /* SKTagView.m in Sources */,
 				D865CB921A6415B200F3592C /* TagsTableViewController.m in Sources */,
 				682ABA701A36933300D57A1A /* main.m in Sources */,
+				BF1687F21B9D3E40009DAB90 /* UIView+Autolayout.m in Sources */,
 				E198833B70106A7B969AF9D2 /* SKTag.m in Sources */,
 				E1988E0CF76D59E86E94A7CC /* SKTagButton.m in Sources */,
 			);
@@ -453,6 +459,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Classes/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = SKTagView;
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
@@ -465,6 +472,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Classes/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = SKTagView;
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
